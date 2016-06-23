@@ -1,0 +1,27 @@
+
+2016.06.12
++ menuitem "Upload here" for dir/server
+
+2016.06.08
++ support for SFTP, Linux only
++ menu item in Plugins: Menu Connect
++ server prop: Timeout
++ passw can be "?" to ask each time
+
+2016.06.04
++ ftp server prop "Init dir"
+
+2016.06.02
++ statusbar progress on downld, Esc key
++ commd "Go to" for server
+
+2016.05.31
++ ftp errors will show in output-pane now
++ status msg on deleting big dirs, Esc key
+* changed fmt of opt-file
+
+2016.05.26
++ support for Win32 [Py3.3]
+
+2016.05.25
+init version
