@@ -1,3 +1,6 @@
+2026.04.30
+- fix: plugin crashed on start if Paramiko lib is absent
+
 2025.11.20
 - fix: avoid deprecated API
 
