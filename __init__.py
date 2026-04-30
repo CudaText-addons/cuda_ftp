@@ -230,12 +230,14 @@ class SFTP:
         PK_TYPES = []
 
     def connect(self, address, port, timeout=None):
+        if not paramiko: return
         self.address = address
         self.port = port
         self.sock = socket.create_connection((address, port), timeout=timeout)
         self.transport = paramiko.transport.Transport(self.sock)
 
     def login(self, username, password, pkey_path, remote_cert_fp):
+        if not paramiko: return
         if pkey_path: # login with private key
             pkey = self._get_private_key(username, pkey_path)
 
@@ -260,6 +262,7 @@ class SFTP:
         yield None
 
     def quit(self):
+        if not paramiko: return
         self.sftp.close()
         self.transport.close()
 
