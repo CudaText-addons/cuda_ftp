@@ -9,7 +9,7 @@ import tempfile
 import socket
 import stat
 from ftplib import FTP, error_perm
-from .pathlib import Path, PurePosixPath
+from pathlib import Path, PurePosixPath
 from datetime import datetime
 from .dlg import *
 import hashlib
