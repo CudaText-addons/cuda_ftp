@@ -227,8 +227,7 @@ class SFTP:
             paramiko.dsskey.DSSKey,
         ]
     else:
-        pass
-        # raise Exception('Paramiko is not installed')
+        PK_TYPES = []
 
     def connect(self, address, port, timeout=None):
         self.address = address
