@@ -16,10 +16,11 @@ import hashlib
 import base64
 import math
 
+IS_WIN = os.name == 'nt'
 #for Windows, use portable installation of Paramiko+others
 v = sys.version_info
 v = str(v[0])+str(v[1])
-if os.name=='nt':
+if IS_WIN:
     if platform.architecture()[0] == '32bit':
         dirname = 'x32'
     else:
@@ -226,7 +227,8 @@ class SFTP:
             paramiko.dsskey.DSSKey,
         ]
     else:
-        raise Exception('Paramiko is not installed')
+        pass
+        # raise Exception('Paramiko is not installed')
 
     def connect(self, address, port, timeout=None):
         self.address = address
@@ -799,7 +801,7 @@ class Command:
 
         server = self.get_server_by_alias(self.get_info(index).caption)
 
-        prefix = pathlib.Path(
+        prefix = Path(
             server_type(server),
             server_address(server),
             server_port(server)
@@ -817,6 +819,8 @@ class Command:
         login = path.parts[3]
         server = self.get_server_by_short_info(address, login)
         virtual = PurePosixPath(*path.parts[:4])
+        if IS_WIN:
+            path = PurePosixPath(path)
         server_path = PurePosixPath("/") / path.relative_to(virtual)
         return server, server_path, client_path
 
@@ -1351,8 +1355,6 @@ class Command:
 
         path_ = os.path.join(os.path.expanduser('~'), 'cudatext_ftp') + os.sep
         alias_server_path = (alias + str(server_path)).replace(':', '_')
-        if os.name == 'nt':
-            alias_server_path = alias_server_path.replace('/', '_')
         path_ += alias_server_path
 
         def get_filedir_(dat_):
